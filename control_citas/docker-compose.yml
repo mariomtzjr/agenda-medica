@@ -10,7 +10,7 @@ services:
     ports:
       - '5433:5432'
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data/
+      - ./postgre_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -25,6 +25,7 @@ services:
     depends_on:
       - db
 
-
+volumes:
+  postgres_data:
 
 
