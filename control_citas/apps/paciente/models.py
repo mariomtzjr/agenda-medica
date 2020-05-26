@@ -4,9 +4,13 @@ from django.db import models
 # Create your models here.
 class Paciente(models.Model):
 
+    GENDER_CHOICES = [
+        ('F', 'FEMENINO'),
+        ('M', 'MASCULINO'),
+    ]
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
-    sexo = models.CharField(max_length=10)
+    sexo = models.CharField(max_length=1, choices=GENDER_CHOICES)
     edad = models.IntegerField()
     alergias = models.CharField(max_length=50)
     fecha_ingreso = models.DateTimeField()

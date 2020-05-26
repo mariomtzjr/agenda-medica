@@ -1,7 +1,7 @@
 from django.db import models
 
-from doctor.models import Doctor
-from paciente.models import Paciente
+from apps.doctor.models import Doctor
+from apps.paciente.models import Paciente
 
 
 # Create your models here.
