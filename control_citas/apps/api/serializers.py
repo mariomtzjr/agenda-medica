@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from apps.paciente.models import Paciente
 from apps.cita.models import Cita
+from apps.doctor.models import Doctor
 
 
 class PacienteSerializer(serializers.ModelSerializer):
@@ -27,4 +28,18 @@ class CitaSerializer(serializers.ModelSerializer):
             'paciente',
             'fecha_cita',
             'razones',
+        )
+
+
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = (
+            'nombre',
+            'apellidos',
+            'cedula',
+            'telefono',
+            'area',
+            'comentario',
+            'paciente',
         )
