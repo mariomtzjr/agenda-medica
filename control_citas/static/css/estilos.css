@@ -1,0 +1,25 @@
+
+.form-crear {
+	width: 500px;
+	margin: 10px auto;
+}
+
+.paciente-title {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 60px;
+}
+
+.errorlist {
+	display: none !important;
+}
+
+body form button ul.paciente_guardar {
+	margin-left: 100px;
+	color: black !important;
+}
+
+ul {
+	list-style-type: none;
+}

@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Eliminar Paciente {% endblock %}
+
+{% block content %}
+	<h2 class="paciente-title">¿Deseas eliminar el registro de {{ object.nombre }} {{ object.apellidos }}?.</h2>
+	<form method="post" class="form-crear">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-outline-danger">Sí, eliminar</button>
+		<a href="{% url 'paciente:paciente_listar' %}" class="btn btn-default">Cancelar</a>
+	</form>
+{% endblock %}

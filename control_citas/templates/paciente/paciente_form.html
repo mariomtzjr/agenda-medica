@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Crear Paciente {% endblock %}
+
+{% block content %}
+	<h1 class="paciente-title">Crear Nuevo Paciente</h1>
+	<form method="post" class="form-crear">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div class="d-flex flex-nowrap justify-content-end">
+			<button type="submit" class="btn btn-outline-primary" style="width: 160px;">Guardar</button>
+			<a href="{% url 'paciente:paciente_listar' %}" class="btn btn-outline-danger ml-2" style="width: 160px;">Cancelar</a>
+		</div>
+
+	</form>
+{% endblock %}

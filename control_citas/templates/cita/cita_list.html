@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+	<h1 class="paciente-title">Lista de Citas</h1>
+
+	<table class="table w-auto p-3 mx-auto">
+	  <thead class="thead-light">
+	  	{% if object_list %}
+	    <tr>
+	      <th scope="col">No. Cita</th>
+	      <th scope="col">Doctor</th>
+	      <th scope="col">Paciente</th>
+	      <th scope="col">Razones</th>
+	      <th scope="col">Acciones</th>
+	    </tr>
+	    {% endif %}
+	  </thead>
+	  <tbody>
+	  	{% if object_list %}
+	  		{% for solicitud in object_list %}
+		    <tr>
+		      <th scope="row">{{solicitud.id}}</th>
+		      <td>{{solicitud.doctor}}</td>
+		      <td>{{solicitud.doctor.paciente}}</td>
+		      <td>{{solicitud.razones}}</td>
+		      <td>
+		      	<a href="#" class="mx-auto pl-2"><i class="fas fa-edit fa-lg mx-auto"></i></a>
+		      	<a href="#" class="mx-auto pl-2 text-danger"><i class="fas fa-trash-alt fa-lg mx-auto"></i></a>
+		      </td>
+		    </tr>
+		    {% endfor %}
+		{% else %}
+			<h2 class="paciente-title">No hay registros de citas</h2>
+		{% endif %}
+	  </tbody>
+	</table>
+{% endblock %}
