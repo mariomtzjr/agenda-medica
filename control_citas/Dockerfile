@@ -22,6 +22,7 @@ RUN pip install -r requirements.txt
 # Copiamos el proyecto
 COPY . /code/
 
-# run entrypoint.sh
-ENTRYPOINT ["/code/entrypoint.sh"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# run entrypoin"t.sh
+ENTRYPOINT ["sh", "/code/entrypoint.sh"]
+

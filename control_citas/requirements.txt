@@ -1,5 +1,5 @@
-Django==2.2
+Django==2.2.1
+gunicorn
 djangorestframework
 markdown
-python-dotenv
 psycopg2-binary
