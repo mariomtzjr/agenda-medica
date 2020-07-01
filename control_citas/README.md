@@ -2,13 +2,19 @@
 
 ## Run in production
 `docker-compose -f docker-compose.prod.yml up -d --build`  
-Migrate tables
+
+### Migrate tables
+
 `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`  
-Collecting static files
+
+### Collecting static files
+
 `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`  
-Create superuser
+
+### Create superuser
+
 `docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser`  
- Output:  
+Output:  
  ```
 Username (leave blank to use 'app'): admin
 Email address:
