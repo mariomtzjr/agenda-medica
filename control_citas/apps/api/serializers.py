@@ -14,7 +14,6 @@ class PacienteSerializer(serializers.ModelSerializer):
             'sexo',
             'edad',
             'alergias',
-            'fecha_ingreso',
             'email',
         )
         read_only_fields = ('created_at', 'updated_at',)
@@ -27,7 +26,7 @@ class CitaSerializer(serializers.ModelSerializer):
             'doctor',
             'paciente',
             'fecha_cita',
-            'razones',
+            'comentario',
         )
 
 
@@ -40,5 +39,4 @@ class DoctorSerializer(serializers.ModelSerializer):
             'cedula',
             'telefono',
             'area',
-            'comentario',
         )

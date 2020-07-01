@@ -26,3 +26,6 @@ class Cita(models.Model):
     class Meta:
         verbose_name = "cita"
         verbose_name_plural = "citas"
+
+    def __str__(self):
+        return str(self.paciente) + " -> " + str(self.doctor)
