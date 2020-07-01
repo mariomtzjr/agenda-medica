@@ -29,6 +29,18 @@ Superuser created successfully.
 ## Run Developement
 `docker-compose -f docker-compose.yml --build`  
 `docker-compose -f docker-compose.yml up`
+`docker-compose -f docker-compose.yml exec web python manage.py createsuperuser`  
+Output:  
+```
+Username (leave blank to use 'app'): admin
+Email address:
+Password:
+Password (again):
+The password is too similar to the username.
+This password is too common.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+```
 
 ## Endpoints
 
