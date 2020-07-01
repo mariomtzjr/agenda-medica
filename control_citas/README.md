@@ -1,14 +1,27 @@
 # Control de citas médicas
 
 ## Run in production
-`docker-compose -f docker-compose.prod.yml up -d --build`
+`docker-compose -f docker-compose.prod.yml up -d --build`  
 Migrate tables
-`docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`
+`docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`  
 Collecting static files
-`docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`
+`docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`  
+Create superuser
+`docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser`  
+ Output:  
+ ```
+Username (leave blank to use 'app'): admin
+Email address:
+Password:
+Password (again):
+The password is too similar to the username.
+This password is too common.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+ ```
 
 ## Run Developement
-`docker-compose -f docker-compose.yml --build`
+`docker-compose -f docker-compose.yml --build`  
 `docker-compose -f docker-compose.yml up`
 
 ## Endpoints
