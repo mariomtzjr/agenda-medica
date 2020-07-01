@@ -41,5 +41,4 @@ class DoctorSerializer(serializers.ModelSerializer):
             'telefono',
             'area',
             'comentario',
-            'paciente',
         )

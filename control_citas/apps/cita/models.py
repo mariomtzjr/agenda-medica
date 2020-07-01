@@ -18,9 +18,10 @@ class Cita(models.Model):
         blank=True,
         on_delete=models.SET_NULL
     )
-    fecha_cita = models.DateTimeField(auto_now_add=True)
+    fecha_cita = models.DateTimeField()
+    comentario = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    razones = models.TextField()
 
     class Meta:
         verbose_name = "cita"

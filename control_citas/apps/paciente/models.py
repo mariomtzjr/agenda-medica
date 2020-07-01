@@ -13,7 +13,6 @@ class Paciente(models.Model):
     sexo = models.CharField(max_length=1, choices=GENDER_CHOICES)
     edad = models.IntegerField()
     alergias = models.CharField(max_length=50)
-    fecha_ingreso = models.DateTimeField()
     email = models.EmailField(max_length=50)
     domicilio = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
