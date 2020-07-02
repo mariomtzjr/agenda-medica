@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from apps.paciente.views import (
     PacienteCreate,
@@ -36,7 +38,4 @@ urlpatterns = [
     path('doctor/listar', DoctorListar.as_view(), name="doctor_listar"),
     path('doctor/editar/<int:pk>', DoctorUpdate.as_view(), name="doctor_update"),
     path('doctor/eliminar/<int:pk>', DoctorDelete.as_view(), name="doctor_delete"),
-
-
-
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

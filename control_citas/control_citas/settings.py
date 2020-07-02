@@ -142,7 +142,11 @@ LOCALE_PATHS = [
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATIC_URL = "/staticfiles/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "staticfiles"),
+]
 
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "False")
 EMAIL_HOST = os.environ.get("EMAIL_HOST", "")

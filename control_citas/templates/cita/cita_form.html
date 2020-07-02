@@ -1,26 +1,18 @@
 {% extends 'base/base.html' %}
-{% load staticfiles %}
+{% load rest_framework %}
+
 {% block title %} Crear Cita {% endblock %}
 
 {% block content %}
 	<h1 class="paciente-title">Crear Nueva Cita</h1>
-	<form method="post" class="form-crear">
+	<form method="post" action="{% url 'cita_crear' %}" class="form-crear" novalidate>
 		{% csrf_token %}
 
-		{{ form2.as_table }}
-		{{ form.as_table }}
+		{% render_form serializer %}
 		<div class="d-flex flex-nowrap justify-content-end">
 			<button type="submit" class="btn btn-outline-primary" style="width: 160px;">Guardar</button>
-			<a href="{% url 'paciente:paciente_listar' %}" class="btn btn-outline-danger ml-2" style="width: 160px;">Cancelar</a>
+			<a href="{% url 'paciente_listar' %}" class="btn btn-outline-danger ml-2" style="width: 160px;">Cancelar</a>
 		</div>
 
 	</form>
 {% endblock %}
-
-<script>
-  $(function () {
-    $("#datetimepicker1").datetimepicker({
-      format: 'DD/MM/YYYY HH:mm',
-    });
-  });
-</script>

@@ -15,3 +15,5 @@ def send_email(self, request, queryset):
 class CitaAdmin(admin.ModelAdmin):
     actions = [send_email]
     send_email.short_description = "Send an email to selected patients"
+
+    

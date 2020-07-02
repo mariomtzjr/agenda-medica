@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework import status
 
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -17,6 +19,20 @@ from apps.cita.forms import SendEmailForm
 # Create your views here.
 class CitaCreate(generics.CreateAPIView):
     serializer_class = CitaSerializer
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'cita/cita_form.html'
+
+    def get(self, request, *args, **kwargs):
+        serializer = CitaSerializer()
+        return Response({'serializer': serializer})
+    
+    def post(self, request):
+        serializer = CitaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('citas_listar')
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # SendUserEmails view class

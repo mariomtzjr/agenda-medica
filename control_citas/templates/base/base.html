@@ -3,9 +3,10 @@
 <html lang="es">
 <head>
 	<!-- Agregar bloques extras para bibliotecas -->
+	<link rel="stylesheet" href="{% static 'apps/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'apps/css/estilos.css' %}">
 	{% block extrahead %}
-		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+		
 	{% endblock %}
 	<meta charset="UTF-8">
 	<title>{% block title %} Prueba YEMA {% endblock %}</title>
@@ -13,7 +14,7 @@
 <body>
 	{% block header%}
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <a class="navbar-brand" href="#">Navbar</a>
+		  <a class="navbar-brand" href="#">YEMA Test</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
@@ -25,8 +26,8 @@
 		          Citas
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="{% url 'cita:cita_crear' %}">Crear Cita</a>
-		          <a class="dropdown-item" href="{% url 'cita:cita_listar' %}">Listar Citas</a>
+		          <a class="dropdown-item" href="{% url 'cita_crear' %}">Crear Cita</a>
+		          <a class="dropdown-item" href="{% url 'cita_listar' %}">Listar Citas</a>
 		        </div>
 		      </li>
 
@@ -35,8 +36,8 @@
 		          Pacientes
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="{% url 'paciente:paciente_crear' %}">Crear paciente</a>
-		          <a class="dropdown-item" href="{% url 'paciente:paciente_listar' %}">Listar pacientes</a>
+		          <a class="dropdown-item" href="{% url 'paciente_crear' %}">Crear paciente</a>
+		          <a class="dropdown-item" href="{% url 'paciente_listar' %}">Listar pacientes</a>
 		        </div>
 		      </li>
 		    </ul>
