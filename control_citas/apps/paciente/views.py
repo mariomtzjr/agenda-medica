@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework import status
 
 from apps.api.serializers import PacienteSerializer
 from apps.paciente.models import Paciente
@@ -11,11 +13,32 @@ from apps.paciente.models import Paciente
 # Create your views here.
 class PacienteCreate(generics.CreateAPIView):
     serializer_class = PacienteSerializer
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'paciente/paciente_form.html'
+
+    def get(self, request, *args, **kwargs):
+        serializer = PacienteSerializer()
+        return Response({'serializer': serializer})
+    
+    def post(self, request):
+        serializer = PacienteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('paciente_listar')
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PacienteListar(generics.ListAPIView):
     serializer_class = PacienteSerializer
-    queryset = Paciente.objects.all()
+    
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'paciente/paciente_list.html'
+
+    def get(self, request, *args, **kwargs):
+        queryset = Paciente.objects.all()
+        serializer = PacienteSerializer(queryset, many=True)
+        return Response({'serializer': serializer})
 
 
 class PacienteUpdate(generics.UpdateAPIView):
