@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} delete-confirmation{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='cita' %}">{% trans "Cita" %}</a>
+&rsaquo; <span>{% trans 'Send email' %}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2>{% trans 'Write your message here:' %}</h2>
+<form method="POST" action="{% url 'email' %}">
+{% csrf_token %}
+    <div>
+        <div>
+            <p>{{ form.users.errors }}</p>
+            <p>{{ form.users.label_tag }}</p>
+            <p>
+                {% for cita in form.initial.pacientes %}
+                    {{ cita.paciente.email }}{% if not forloop.last %},&nbsp;{% endif %}
+                {% endfor %}
+            </p>
+            <select name="citas" multiple style="display: none">
+                {% for cita in form.initial.pacientes %}
+                    <option value="{{ cita.id }}" selected>{{ cita.paciente.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <p>{{ form.subject.errors }}</p>
+            <p>{{ form.subject.label_tag }}</p>
+            <div class="form-group">
+                {% for cita in form.initial.pacientes %}
+                <input class="input-subject" type="text" name="subject" value="Cita con {{cita.doctor}} el día {{cita.fecha_cita}}">
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <p>{{ form.message.errors }}</p>
+            <p>{{ form.message.label_tag }}</p>
+            <p>{{ form.message }}</p>
+        </div>
+        <input type="submit" value="{% trans 'Send message' %}" />
+        <a href="{% url 'cita_listar' %}" class="button cancel-link">{% trans "No, take me back" %}</a>
+    </div>
+</form>
+{% endblock %}

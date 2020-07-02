@@ -12,7 +12,7 @@ COPY entrypoint.sh /code/entrypoint.sh
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+    && apk add postgresql-dev gcc python3-dev musl-dev gettext-dev
 
 RUN chmod +x /code/entrypoint.sh
 

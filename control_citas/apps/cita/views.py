@@ -4,13 +4,35 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import generics
 
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+
 from apps.api.serializers import CitaSerializer
 from apps.cita.models import Cita
+from apps.cita.forms import SendEmailForm
 
 
 # Create your views here.
 class CitaCreate(generics.CreateAPIView):
     serializer_class = CitaSerializer
+
+
+# SendUserEmails view class
+class CitaEmail(FormView):
+    template_name = 'cita/send_email.html'
+    form_class = SendEmailForm
+    success_url = reverse_lazy('admin:citas')
+
+    def form_valid(self, form):
+        users = form.cleaned_data['users']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        send_mail(subject, message, '', users)
+        user_message = '{0} users emailed successfully!'.format(form.cleaned_data['users'].count())
+        messages.success(self.request, user_message)
+        return super(CitaEmail, self).form_valid(form)
 
 
 class CitaListar(generics.ListAPIView):

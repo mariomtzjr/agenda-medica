@@ -10,7 +10,8 @@ from apps.cita.views import (
     CitaCreate,
     CitaListar,
     CitaUpdate,
-    CitaDelete
+    CitaDelete,
+    CitaEmail,
 )
 from apps.doctor.views import (
     DoctorCreate,
@@ -29,6 +30,7 @@ urlpatterns = [
     path('citas/listar', CitaListar.as_view(), name="cita_listar"),
     path('citas/editar/<int:pk>', CitaUpdate.as_view(), name="cita_update"),
     path('citas/eliminar/<int:pk>', CitaDelete.as_view(), name="cita_delete"),
+    path('citas/send_email/', CitaEmail.as_view(), name="email"),
 
     path('doctor/crear', DoctorCreate.as_view(), name="doctor_crear"),
     path('doctor/listar', DoctorListar.as_view(), name="doctor_listar"),
