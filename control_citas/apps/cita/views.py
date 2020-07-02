@@ -35,25 +35,15 @@ class CitaCreate(generics.CreateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# SendUserEmails view class
-class CitaEmail(FormView):
-    template_name = 'cita/send_email.html'
-    form_class = SendEmailForm
-    success_url = reverse_lazy('admin:citas')
-
-    def form_valid(self, form):
-        users = form.cleaned_data['users']
-        subject = form.cleaned_data['subject']
-        message = form.cleaned_data['message']
-        send_mail(subject, message, '', users)
-        user_message = '{0} users emailed successfully!'.format(form.cleaned_data['users'].count())
-        messages.success(self.request, user_message)
-        return super(CitaEmail, self).form_valid(form)
-
-
 class CitaListar(generics.ListAPIView):
     serializer_class = CitaSerializer
-    queryset = Cita.objects.all()
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'cita/cita_list.html'
+
+    def get(self, request, *args, **kwargs):
+        queryset = Cita.objects.all()
+        serializer = CitaSerializer(queryset, many=True)
+        return Response({'serializer': serializer})
 
 
 class CitaUpdate(generics.UpdateAPIView):
@@ -81,3 +71,19 @@ class CitaDelete(generics.DestroyAPIView):
         cita = self.get_object(pk)
         cita.delete()
         return redirect('cita_listar')
+
+
+# SendUserEmails view class
+class CitaEmail(FormView):
+    template_name = 'cita/send_email.html'
+    form_class = SendEmailForm
+    success_url = reverse_lazy('admin:citas')
+
+    def form_valid(self, form):
+        users = form.cleaned_data['users']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        send_mail(subject, message, '', users)
+        user_message = '{0} users emailed successfully!'.format(form.cleaned_data['users'].count())
+        messages.success(self.request, user_message)
+        return super(CitaEmail, self).form_valid(form)
